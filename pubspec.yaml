@@ -1,0 +1,40 @@
+name: maids_todo_app_test
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  dio: ^5.4.3+1
+  go_router: ^14.1.1
+  shared_preferences: ^2.2.3
+  logger: ^2.3.0
+  intl: ^0.19.0
+  get_it: ^7.7.0
+  injectable:
+  flutter_bloc: ^8.1.5
+  equatable: ^2.0.5
+  dio_cache_interceptor: ^3.5.0
+  internet_connection_checker: ^1.0.0+1
+  flutter_screenutil:
+  fpdart: ^1.1.0
+  uuid: ^4.4.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  # A build system for Dart code generation and modular compilation
+  build_runner: ^2.4.10
+  # Dependency injection code generator
+  injectable_generator: ^2.6.1
+  # Freezed package code generator
+  freezed: ^2.5.2
+  # Used in freezed package
+  json_serializable: ^6.8.0
+flutter:
+  uses-material-design: true
+
