@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/foundation.dart';
@@ -8,11 +6,10 @@ import 'package:maids_todo_app_test/core/di/service_locator.dart';
 import 'package:maids_todo_app_test/core/networking/api_consumer.dart';
 import 'package:maids_todo_app_test/core/networking/dio_logger_interceptor.dart';
 import 'package:maids_todo_app_test/core/networking/end_points.dart';
-import 'package:maids_todo_app_test/core/networking/headers_interceptor.dart';
 
 @LazySingleton(as: ApiConsumer)
 class DioConsumer implements ApiConsumer {
-  DioConsumer() {
+  DioConsumer(this._client) {
     _client.options
       ..sendTimeout = const Duration(seconds: 10)
       ..connectTimeout = const Duration(seconds: 60)
@@ -20,13 +17,12 @@ class DioConsumer implements ApiConsumer {
       ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.json
       ..followRedirects = true;
-    _client.interceptors.add(getIt<DioHeadersInterceptor>());
     if (kDebugMode) {
       _client.interceptors.add(getIt<DioLoggerInterceptor>());
     }
     _client.interceptors.add(getIt<DioCacheInterceptor>());
   }
-  late final Dio _client;
+  final Dio _client;
 
   @override
   Future get(String path,
@@ -37,7 +33,7 @@ class DioConsumer implements ApiConsumer {
         queryParameters: queryParameters,
         cancelToken: cancelToken,
       );
-      return _handleOnlineResponseAsJson(response);
+      return response.data;
     } catch (error) {
       rethrow;
     }
@@ -51,7 +47,7 @@ class DioConsumer implements ApiConsumer {
     try {
       final response = await _client.post(path,
           queryParameters: queryParameters, data: formData ?? body);
-      return _handleOnlineResponseAsJson(response);
+      return response.data;
     } catch (error) {
       rethrow;
     }
@@ -67,7 +63,7 @@ class DioConsumer implements ApiConsumer {
         queryParameters: queryParameters,
         data: body,
       );
-      return _handleOnlineResponseAsJson(response);
+      return response.data;
     } catch (error) {
       rethrow;
     }
@@ -80,14 +76,9 @@ class DioConsumer implements ApiConsumer {
         path,
         queryParameters: queryParameters,
       );
-      return _handleOnlineResponseAsJson(response);
+      return response.data;
     } catch (error) {
       rethrow;
     }
-  }
-
-  dynamic _handleOnlineResponseAsJson(Response response) {
-    final responseJson = jsonDecode(response.data.toString());
-    return responseJson;
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:maids_todo_app_test/core/di/service_locator.dart';
-import 'package:maids_todo_app_test/core/navigation/route_data_handler.dart';
+import 'package:maids_todo_app_test/features/user/presentation/pages/login_page.dart';
 
 @lazySingleton
 class NavigationRoute {
@@ -19,10 +18,9 @@ class NavigationRoute {
   GoRouter refreshRouter() => _getRouter;
 
   GoRouter get _getRouter {
-    final routeData = getIt<RouteDataHandler>();
     return GoRouter(
       navigatorKey: _routerKey,
-      initialLocation: '/',
+      initialLocation: LoginPage.urlPath,
       routes: [
         // GoRoute(
         //   path: '/',
@@ -30,21 +28,13 @@ class NavigationRoute {
         //     return LoginScreen.urlPath;
         //   },
         // ),
-        // GoRoute(
-        //   name: LoginScreen.routeName,
-        //   path: LoginScreen.urlPath,
-        //   redirect: (context, state) {
-        //     if (routeData.isLoggedIn) {
-        //       return AppMainScreen.urlPath;
-        //     }
-        //     return null;
-        //   },
-        //   builder: (context, state) {
-        //     return LoginScreen(
-        //       param: LoginScreenParam(),
-        //     );
-        //   },
-        // ),
+        GoRoute(
+          name: LoginPage.routeName,
+          path: LoginPage.urlPath,
+          builder: (context, state) {
+            return const LoginPage();
+          },
+        ),
       ],
       errorBuilder: (context, state) {
         return _errorRoute();

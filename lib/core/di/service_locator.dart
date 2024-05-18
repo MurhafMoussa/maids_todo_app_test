@@ -1,7 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-
-import 'service_locator.config.dart';
+import 'package:maids_todo_app_test/core/di/service_locator.config.dart';
 
 final getIt = GetIt.instance;
 

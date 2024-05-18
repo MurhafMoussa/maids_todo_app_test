@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:maids_todo_app_test/core/errors/app_exceptions.dart';
 import 'package:maids_todo_app_test/core/errors/exception_handler.dart';
 import 'package:maids_todo_app_test/core/networking/connectivity.dart';
@@ -7,6 +8,7 @@ import 'package:maids_todo_app_test/features/user/data/data_sources/user_local_d
 import 'package:maids_todo_app_test/features/user/data/data_sources/user_remote_data_source.dart';
 import 'package:maids_todo_app_test/features/user/domain/repositories/user_facade.dart';
 
+@LazySingleton(as: UserFacade)
 class UserFacadeImpl implements UserFacade {
   UserFacadeImpl(
     this._userLocalDataSource,

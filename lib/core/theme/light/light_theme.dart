@@ -103,10 +103,27 @@ ThemeData _getLightTheme() {
     badgeTheme: const BadgeThemeData(
       backgroundColor: Colors.transparent,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
+    inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.white,
+      enabledBorder: _fieldBorder,
+      disabledBorder: _fieldBorder,
+      errorBorder: _fieldBorder,
+      focusedBorder: _fieldBorder,
+      focusedErrorBorder: _fieldBorder,
       alignLabelWithHint: true,
+      floatingLabelStyle: TextThemeStyles.getTextStyle(
+        FigmaFontStyle.subtitle1Medium,
+        color: AppColors.gray2,
+      ),
+      labelStyle: TextThemeStyles.getTextStyle(
+        FigmaFontStyle.h3Regular,
+        color: AppColors.gray2,
+      ),
+      hintStyle: TextThemeStyles.getTextStyle(
+        FigmaFontStyle.h3Regular,
+        color: AppColors.gray2,
+      ),
       iconColor: AppColors.dark,
       suffixIconColor: AppColors.dark,
       prefixIconColor: AppColors.dark,
@@ -132,6 +149,16 @@ ThemeData _getLightTheme() {
       bodyColor: AppColors.dark,
     ),
     materialTapTargetSize: MaterialTapTargetSize.padded,
+    filledButtonTheme: FilledButtonThemeData(
+      style: _buttonStyle,
+    ),
+  );
+}
+
+UnderlineInputBorder get _fieldBorder {
+  return UnderlineInputBorder(
+    borderSide: const BorderSide(color: AppColors.gray3),
+    borderRadius: BorderRadiusManager.radiusAll8,
   );
 }
 
@@ -145,6 +172,14 @@ ButtonStyle get _buttonStyle {
         return null;
       },
     ),
+    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadiusManager.radiusAll8,
+      ),
+    ),
+    padding:
+        WidgetStateProperty.all(PaddingManager.paddingHorizontal16Vertical12),
+    textStyle: WidgetStateProperty.all<TextStyle>(TextThemeStyles.bodyLarge),
     foregroundColor: WidgetStateProperty.resolveWith(
       (states) {
         if (states.contains(WidgetState.disabled)) {

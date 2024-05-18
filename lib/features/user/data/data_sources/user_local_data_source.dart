@@ -10,7 +10,7 @@ abstract class UserLocalDataSource {
   UserModel? getUser();
 }
 
-@lazySingleton
+@LazySingleton(as: UserLocalDataSource)
 class UserLocalDataSourceImpl implements UserLocalDataSource {
   const UserLocalDataSourceImpl(this._sharedPreferences);
   final SharedPreferences _sharedPreferences;

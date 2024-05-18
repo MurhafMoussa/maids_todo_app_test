@@ -9,7 +9,7 @@ Future<Result<T>> handleRepositoryCalls<T>(
     final response = await operation();
 
     return Right(response);
-  } catch (error) {
-    return Left(AppExceptions.getException(error));
+  } catch (error, stackTrace) {
+    return Left(AppExceptions.getException(error, stackTrace));
   }
 }

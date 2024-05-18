@@ -6,20 +6,14 @@ import 'package:maids_todo_app_test/features/user/data/models/user_model.dart';
 
 abstract class UserRemoteDataSource {
   Future<UserModel> login(LoginParam body);
-  Future<UserModel> getUser();
   Future<UserModel> refreshToken();
 }
 
-@lazySingleton
+@LazySingleton(as: UserRemoteDataSource)
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   const UserRemoteDataSourceImpl(this._apiConsumer);
 
   final ApiConsumer _apiConsumer;
-  @override
-  Future<UserModel> getUser() async {
-    final response = await _apiConsumer.get(EndPoints.getCurrentUser);
-    return UserModel.fromJson(response);
-  }
 
   @override
   Future<UserModel> refreshToken() async {

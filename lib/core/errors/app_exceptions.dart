@@ -1,9 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:maids_todo_app_test/core/errors/error_model.dart';
+import 'package:maids_todo_app_test/core/extensions/logger_extension.dart';
 
 part 'app_exceptions.freezed.dart';
 
@@ -51,7 +52,7 @@ abstract class AppExceptions with _$AppExceptions {
   const factory AppExceptions.unexpectedError() = UnexpectedError;
 
   factory AppExceptions._handleResponse(Response? response) {
-    ErrorModel errorModel = ErrorModel.fromJson(jsonDecode(response?.data));
+    ErrorModel errorModel = ErrorModel.fromJson(response?.data);
 
     int statusCode = response?.statusCode ?? 0;
 
@@ -85,7 +86,9 @@ abstract class AppExceptions with _$AppExceptions {
     }
   }
 
-  factory AppExceptions.getException(error) {
+  factory AppExceptions.getException(error, StackTrace stack) {
+    error.toString().logE;
+    stack.toString().logE;
     if (error is Exception) {
       try {
         AppExceptions exception;

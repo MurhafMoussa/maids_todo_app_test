@@ -11,19 +11,17 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 812),
       builder: (BuildContext context, _) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: getIt<NavigationRoute>().router,
           theme: ThemesData.lightTheme(),
           darkTheme: ThemesData.darkTheme(),
-          builder: (BuildContext context, Widget? widget) {
+          builder: (context, child) {
             return MediaQuery(
-                data: MediaQuery.of(context).copyWith(
-                  textScaler: TextScaler.noScaling,
-                ),
-                child: Scaffold());
+              data: const MediaQueryData(textScaler: TextScaler.noScaling),
+              child: child!,
+            );
           },
         );
       },

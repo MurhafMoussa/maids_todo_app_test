@@ -48,6 +48,10 @@ android/*.hprof
 
 
 *.freezed.dart
+*.config.dart
 *.g.dart
 # FVM Version Cache
-.fvm/
+.fvm/flutter_sdk
+.fvm/version
+.fvm/versions
+.fvm/release

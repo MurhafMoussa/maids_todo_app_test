@@ -12,6 +12,7 @@ class UserModel extends BaseModel with _$UserModel {
     required String token,
     required int id,
   }) = _UserModel;
+  const UserModel._();
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

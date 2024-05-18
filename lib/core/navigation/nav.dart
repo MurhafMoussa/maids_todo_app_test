@@ -23,7 +23,7 @@ class Nav {
     } catch (ex) {
       ex.toString().logE;
     }
-    go() => appConfigOrParamContext.go(
+    void go() => appConfigOrParamContext.go(
           location,
           extra: arguments?.extra,
         );
