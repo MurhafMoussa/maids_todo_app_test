@@ -6,7 +6,7 @@ class AppColors {
 
   // light theme colors
   /// Used in main components, such as buttons, some icons, tabs..
-  static const Color primaryColorLight = Color(0xff0D76D7);
+  static const Color primaryColorLight = Color(0xffe5412e);
   static const Color primaryInnerColorLight = Color(0xffffffff);
 
   /// Used in complementary components, such as bottom bar buttons, favourite icon,
