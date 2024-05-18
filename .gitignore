@@ -46,18 +46,8 @@ app.*.map.json
 
 android/*.hprof
 
-# FVM
 
-settings.json
-.vscode/launch.json
-
-lib/generated/intl/messages_all.dart
-
-lib/generated/intl/messages_ar.dart
-
-lib/generated/intl/messages_en.dart
-
-lib/generated/l10n.dart
-
+*.freezed.dart
+*.g.dart
 # FVM Version Cache
 .fvm/

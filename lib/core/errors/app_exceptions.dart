@@ -3,8 +3,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:maids_todo_app_test/core/errors/error_model.dart';
 
-part 'errors.freezed.dart';
+part 'app_exceptions.freezed.dart';
 
 @freezed
 abstract class AppExceptions with _$AppExceptions {
@@ -16,7 +17,7 @@ abstract class AppExceptions with _$AppExceptions {
   const factory AppExceptions.badRequest(String reason) = BadRequest;
   const factory AppExceptions.unauthorizedRequest(String reason) =
       UnauthorizedRequest;
-  const factory AppExceptions.forbidden() = Forbidden;
+  const factory AppExceptions.forbidden(String reason) = Forbidden;
 
   const factory AppExceptions.notFound(String reason) = NotFound;
 
@@ -50,21 +51,20 @@ abstract class AppExceptions with _$AppExceptions {
   const factory AppExceptions.unexpectedError() = UnexpectedError;
 
   factory AppExceptions._handleResponse(Response? response) {
-    ApiErrorResponse errorModel =
-        ApiErrorResponse.fromJson(jsonDecode(response?.data));
+    ErrorModel errorModel = ErrorModel.fromJson(jsonDecode(response?.data));
 
     int statusCode = response?.statusCode ?? 0;
 
     switch (statusCode) {
       case 400:
-        return AppExceptions.badRequest('${errorModel.message}');
+        return AppExceptions.badRequest(errorModel.message);
       case 401:
-        return AppExceptions.unauthorizedRequest('${errorModel.message}');
+        return AppExceptions.unauthorizedRequest(errorModel.message);
       case 403:
-        return const AppExceptions.forbidden();
+        return AppExceptions.forbidden(errorModel.message);
 
       case 404:
-        return AppExceptions.notFound('${errorModel.message}');
+        return AppExceptions.notFound(errorModel.message);
       case 405:
         return const AppExceptions.methodNotAllowed();
       case 409:
@@ -72,7 +72,7 @@ abstract class AppExceptions with _$AppExceptions {
       case 408:
         return const AppExceptions.requestTimeout();
       case 422:
-        return AppExceptions.unprocessableEntity('${errorModel.message}');
+        return AppExceptions.unprocessableEntity(errorModel.message);
       case 500:
         return const AppExceptions.internalServerError();
       case 503:
@@ -195,8 +195,8 @@ abstract class AppExceptions with _$AppExceptions {
       notAcceptable: () {
         errorMessage = 'Not acceptable';
       },
-      forbidden: () {
-        errorMessage = 'Forbidden';
+      forbidden: (String error) {
+        errorMessage = error;
       },
       firebasePlatformException: () {
         errorMessage = 'Platform Exception';
