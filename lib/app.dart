@@ -17,6 +17,7 @@ class App extends StatelessWidget {
           routerConfig: getIt<NavigationRoute>().router,
           theme: ThemesData.lightTheme(),
           darkTheme: ThemesData.darkTheme(),
+          title: 'Maidoy',
           builder: (context, child) {
             return MediaQuery(
               data: const MediaQueryData(textScaler: TextScaler.noScaling),

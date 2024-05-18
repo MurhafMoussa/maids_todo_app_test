@@ -25,7 +25,7 @@ dependencies:
   google_fonts: ^6.2.1
   get: ^4.6.6
   flutter_spinkit: ^5.2.1
-  fluttertoast: ^8.2.5
+
   flutter_animate: ^4.5.0
 dev_dependencies:
   flutter_test:
@@ -39,6 +39,12 @@ dev_dependencies:
   freezed: ^2.5.2
   # Used in freezed package
   json_serializable: ^6.8.0
+  # Used to change app icon
+  flutter_launcher_icons: ^0.13.1
+  # Used to change the native splash screen
+  flutter_native_splash: ^2.4.0
+  # Change App Package Name with single command.
+  change_app_package_name: ^1.1.0
 flutter:
   uses-material-design: true
 
