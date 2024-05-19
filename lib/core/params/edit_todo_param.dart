@@ -4,17 +4,16 @@ class EditTodoParam extends BaseParams {
   EditTodoParam({
     super.cancelToken,
     required this.isCompleted,
-    required this.todo,
+    required this.id,
   });
 
   final bool isCompleted;
-  final String todo;
+  final int id;
 
   @override
   Map<String, dynamic> toJson() {
     return {
       'completed': isCompleted,
-      'todo': todo,
     };
   }
 }

@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:maids_todo_app_test/core/constants/assets_manager.dart';
 import 'package:maids_todo_app_test/core/constants/border_radius_manager.dart';
 import 'package:maids_todo_app_test/core/constants/box_shadow_manager.dart';
 import 'package:maids_todo_app_test/core/constants/padding_manager.dart';
+import 'package:maids_todo_app_test/core/constants/sizes_manager.dart';
 import 'package:maids_todo_app_test/core/di/service_locator.dart';
 import 'package:maids_todo_app_test/core/errors/app_exceptions.dart';
+import 'package:maids_todo_app_test/core/navigation/nav.dart';
 import 'package:maids_todo_app_test/core/states/standard_state.dart';
 import 'package:maids_todo_app_test/core/ui/widgets/display_messages_widgets.dart';
 import 'package:maids_todo_app_test/core/ui/widgets/forms/custom_textfield.dart';
-import 'package:maids_todo_app_test/core/ui/widgets/loading_widget.dart';
+import 'package:maids_todo_app_test/features/todo/presentation/pages/todos_page.dart';
 import 'package:maids_todo_app_test/features/user/presentation/manager/login_cubit.dart';
+import 'package:maids_todo_app_test/features/user/presentation/widgets/login_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   static const String routeName = 'LoginPage';
   static const String urlPath = '/login';
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +57,7 @@ class LoginPage extends StatelessWidget {
                         },
                         success: (successValue) {
                           showSuccessSnackBar(successValue, context);
+                          Nav.to(TodosPage.routeName, context: context);
                         },
                       );
                     },
@@ -58,6 +68,10 @@ class LoginPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          Image.asset(
+                            AssetsManager.pngAppIcon,
+                            height: SizesManager.imageSize70,
+                          ),
                           CustomTextField(
                             controller: loginCubit.nameFormFieldController,
                           ),
@@ -66,18 +80,7 @@ class LoginPage extends StatelessWidget {
                             controller: loginCubit.passwordFormFieldController,
                           ),
                           20.verticalSpace,
-                          FilledButton(
-                            onPressed: loginCubit.login,
-                            child:
-                                BlocBuilder<LoginCubit, StandardState<String>>(
-                              builder: (context, state) => state.maybeWhen(
-                                orElse: () => const Text('login'),
-                                loading: () {
-                                  return const LoadingWidget();
-                                },
-                              ),
-                            ),
-                          ),
+                          const LoginButton(),
                         ],
                       ),
                     ),

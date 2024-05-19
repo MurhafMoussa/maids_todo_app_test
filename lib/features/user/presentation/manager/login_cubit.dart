@@ -22,7 +22,6 @@ class LoginCubit extends Cubit<StandardState<String>> {
     );
   }
   final Login _login;
-
   late final NameFormFieldController nameFormFieldController;
   late final PasswordFormFieldController passwordFormFieldController;
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -30,6 +29,7 @@ class LoginCubit extends Cubit<StandardState<String>> {
   String password = '';
 
   Future<void> login() async {
+    if (!formIsValid) return;
     emit(const StandardState.loading());
     final param = LoginParam(
       expirationDateInMinutes: 30,
@@ -43,10 +43,14 @@ class LoginCubit extends Cubit<StandardState<String>> {
     );
   }
 
+  bool get formIsValid =>
+      formKey.currentState != null && formKey.currentState!.validate();
+
   @override
   Future<void> close() {
     nameFormFieldController.dispose();
     passwordFormFieldController.dispose();
+
     return super.close();
   }
 }

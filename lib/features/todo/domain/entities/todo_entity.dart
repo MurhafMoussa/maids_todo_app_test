@@ -2,17 +2,17 @@ import 'package:maids_todo_app_test/core/entities/base_entity.dart';
 
 class TodoEntity extends BaseEntity {
   const TodoEntity({
-    required this.todoId,
+    required this.id,
     required this.userId,
     required this.todo,
-    required this.isCompleted,
+    required this.completed,
   });
 
-  final int todoId;
+  final int id;
   final int userId;
   final String todo;
-  final bool isCompleted;
+  final bool completed;
 
   @override
-  List<Object> get props => [todoId, userId, todo, isCompleted];
+  List<Object> get props => [id, userId, todo, completed];
 }

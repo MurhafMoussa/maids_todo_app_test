@@ -8,7 +8,7 @@ class Nav {
   /// Push
   static void to<T extends Object?>(
     String routeName, {
-    required BaseScreenParam? arguments,
+    BaseScreenParam? arguments,
     required BuildContext context,
     bool canGoBack = true,
   }) {

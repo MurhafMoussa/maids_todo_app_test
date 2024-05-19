@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:maids_todo_app_test/core/di/service_locator.dart';
 import 'package:maids_todo_app_test/core/navigation/route_generator.dart';
-
-import 'core/theme/themes_data.dart';
+import 'package:maids_todo_app_test/core/theme/themes_data.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -21,7 +20,7 @@ class App extends StatelessWidget {
           builder: (context, child) {
             return MediaQuery(
               data: const MediaQueryData(textScaler: TextScaler.noScaling),
-              child: child!,
+              child: SafeArea(child: child!),
             );
           },
         );

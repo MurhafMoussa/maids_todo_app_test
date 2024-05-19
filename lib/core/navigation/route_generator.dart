@@ -1,6 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
+import 'package:maids_todo_app_test/core/di/service_locator.dart';
+import 'package:maids_todo_app_test/features/todo/presentation/pages/todos_page.dart';
+import 'package:maids_todo_app_test/features/user/data/data_sources/user_local_data_source.dart';
 import 'package:maids_todo_app_test/features/user/presentation/pages/login_page.dart';
 
 @lazySingleton
@@ -22,17 +26,22 @@ class NavigationRoute {
       navigatorKey: _routerKey,
       initialLocation: LoginPage.urlPath,
       routes: [
-        // GoRoute(
-        //   path: '/',
-        //   redirect: (context, state) {
-        //     return LoginScreen.urlPath;
-        //   },
-        // ),
         GoRoute(
           name: LoginPage.routeName,
           path: LoginPage.urlPath,
+          redirect: (context, state) {
+            final user = getIt<UserLocalDataSource>().getUser();
+            return optionOf(user).fold(() => null, (_) => TodosPage.urlPath);
+          },
           builder: (context, state) {
             return const LoginPage();
+          },
+        ),
+        GoRoute(
+          name: TodosPage.routeName,
+          path: TodosPage.urlPath,
+          builder: (context, state) {
+            return const TodosPage();
           },
         ),
       ],
