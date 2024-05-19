@@ -34,15 +34,11 @@ class UserFacadeImpl implements UserFacade {
   }
 
   @override
-  Future<Either<AppExceptions, Unit>> refreshToken() async {
-    if (!await _connectivity.isConnected) {
-      return const Left(AppExceptions.noInternetConnection());
-    }
-    return handleRepositoryCalls<Unit>(
+  Future<Either<AppExceptions, String>> logout() {
+    return handleRepositoryCalls<String>(
       () async {
-        final response = await _userRemoteDataSource.refreshToken();
-        _userLocalDataSource.saveUser(response);
-        return unit;
+        _userLocalDataSource.deleteUser();
+        return 'Logged out successfully';
       },
     );
   }

@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class UserLocalDataSource {
   static const userKey = 'user';
   Future<void> saveUser(UserModel user);
+  Future<void> deleteUser();
   UserModel? getUser();
 }
 
@@ -32,5 +33,10 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       UserLocalDataSource.userKey,
       jsonEncode(userAsJson),
     );
+  }
+
+  @override
+  Future<void> deleteUser() async {
+    _sharedPreferences.clear();
   }
 }
