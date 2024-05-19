@@ -23,6 +23,13 @@ class Todo extends StatefulWidget {
 }
 
 class _TodoState extends State<Todo> {
+  late bool completed;
+  @override
+  void initState() {
+    super.initState();
+    completed = widget.todo.completed;
+  }
+
   @override
   Widget build(BuildContext context) {
     final todoOperationsCubit = context.read<TodoOperationsCubit>();
@@ -72,6 +79,9 @@ class _TodoState extends State<Todo> {
           child: CheckboxListTile(
             onChanged: (value) {
               if (value != null) {
+                setState(() {
+                  completed = value;
+                });
                 todoOperationsCubit.edit(
                   EditTodoParam(
                     isCompleted: value,
@@ -80,7 +90,7 @@ class _TodoState extends State<Todo> {
                 );
               }
             },
-            value: widget.todo.completed,
+            value: completed,
             title: Text(
               widget.todo.todo,
               maxLines: 2,

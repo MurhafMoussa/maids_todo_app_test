@@ -11,7 +11,7 @@ import 'package:maids_todo_app_test/features/todo/domain/use_cases/add_todo.dart
 import 'package:maids_todo_app_test/features/todo/domain/use_cases/delete_todo.dart';
 import 'package:maids_todo_app_test/features/todo/domain/use_cases/edit_todo.dart';
 
-@injectable
+@lazySingleton
 class TodoOperationsCubit extends Cubit<StandardState<String>> {
   TodoOperationsCubit(this._addTodo, this._editTodo, this._deleteTodo)
       : super(const StandardState.initial()) {

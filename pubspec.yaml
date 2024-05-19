@@ -32,7 +32,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^4.0.0
   # A build system for Dart code generation and modular compilation
-  build_runner: ^2.4.10
+  build_runner: ^2.4.9
   # Dependency injection code generator
   injectable_generator: ^2.6.1
   # Freezed package code generator

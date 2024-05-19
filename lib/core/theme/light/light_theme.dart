@@ -56,11 +56,11 @@ ThemeData _getLightTheme() {
     tabBarTheme: const TabBarTheme(
       tabAlignment: TabAlignment.start,
       indicatorSize: TabBarIndicatorSize.tab,
-      overlayColor: WidgetStatePropertyAll(Colors.transparent),
+      overlayColor: MaterialStatePropertyAll(Colors.transparent),
     ),
     checkboxTheme: CheckboxThemeData(
-      side: WidgetStateBorderSide.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
+      side: MaterialStateBorderSide.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
           return const BorderSide(
             color: AppColors.primaryColorLight,
             width: 0.5,
@@ -72,13 +72,13 @@ ThemeData _getLightTheme() {
           width: 0.5,
         );
       }),
-      fillColor: const WidgetStatePropertyAll(AppColors.white),
-      checkColor: const WidgetStatePropertyAll(AppColors.primaryColorLight),
+      fillColor: const MaterialStatePropertyAll(AppColors.white),
+      checkColor: const MaterialStatePropertyAll(AppColors.primaryColorLight),
       visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
     ),
     radioTheme: RadioThemeData(
-      fillColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
+      fillColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
           return AppColors.primaryColorLight;
         }
         return AppColors.gray3;
@@ -87,8 +87,8 @@ ThemeData _getLightTheme() {
     ),
     navigationBarTheme: NavigationBarThemeData(
       height: 74.h,
-      iconTheme: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) {
+      iconTheme: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
           return const IconThemeData(
             color: AppColors.secondaryColorLight,
           );
@@ -164,25 +164,25 @@ UnderlineInputBorder get _fieldBorder {
 
 ButtonStyle get _buttonStyle {
   return ButtonStyle(
-    backgroundColor: WidgetStateProperty.resolveWith(
+    backgroundColor: MaterialStateProperty.resolveWith(
       (states) {
-        if (states.contains(WidgetState.disabled)) {
+        if (states.contains(MaterialState.disabled)) {
           return AppColors.gray2;
         }
         return null;
       },
     ),
-    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadiusManager.radiusAll8,
       ),
     ),
     padding:
-        WidgetStateProperty.all(PaddingManager.paddingHorizontal16Vertical12),
-    textStyle: WidgetStateProperty.all<TextStyle>(TextThemeStyles.bodyLarge),
-    foregroundColor: WidgetStateProperty.resolveWith(
+        MaterialStateProperty.all(PaddingManager.paddingHorizontal16Vertical12),
+    textStyle: MaterialStateProperty.all<TextStyle>(TextThemeStyles.bodyLarge),
+    foregroundColor: MaterialStateProperty.resolveWith(
       (states) {
-        if (states.contains(WidgetState.disabled)) {
+        if (states.contains(MaterialState.disabled)) {
           return AppColors.white;
         }
         return null;

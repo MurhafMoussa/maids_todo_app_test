@@ -13,7 +13,7 @@ part 'todos_getter_state.dart';
 const limit = 20;
 const initialPage = 0;
 
-@injectable
+@lazySingleton
 class TodosGetterCubit extends Cubit<TodosGetterState> {
   TodosGetterCubit(this._getAllTodos) : super(const TodosGetterState.loading());
   final GetAllTodos _getAllTodos;

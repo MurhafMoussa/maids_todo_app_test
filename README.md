@@ -1,16 +1,27 @@
-# maids_todo_app_test
+Flutter Todo App
+This is a Flutter application designed to manage your daily tasks with CRUD (Create, Read, Update, Delete) functionalities.
 
-A new Flutter project.
+Features:
 
-## Getting Started
+Add, view, edit, and mark todo items as completed.
+Clean and well-structured codebase for easy maintenance and future enhancements.
 
-This project is a starting point for a Flutter application.
+Running the App:
 
-A few resources to get you started if this is your first Flutter project:
+Prerequisites:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Flutter: https://docs.flutter.dev/get-started/install
+fvm (Flutter Version Manager): https://pub.dev/packages/fvm
+Instructions:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Clone this repository.
+Navigate to the project directory in your terminal.
+Run fvm flutter pub get to install dependencies.
+Run fvm flutter run to launch the app on a connected device or emulator.
+Customizations:
+
+This app utilizes the flutter_native_splash_screen and flutter_launcher_icons packages to provide a polished user experience with a custom native splash screen and app icon.
+Unit Tests:
+
+While comprehensive unit tests are not currently implemented due to time constraints, the codebase is written with testability in mind for future integration.
+
