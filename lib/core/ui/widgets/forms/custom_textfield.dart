@@ -78,7 +78,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     // Observe changes in the form field controller using Obx for reactive UI updates.
 
-    return TextFormField(
+    return Obx(
+            () => TextFormField(
       // Key for identifying and interacting with the text form field.
       key: _controller.key,
 
@@ -138,7 +139,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       showCursor: _controller.cursorSettings.showCursor,
       textAlignVertical: _controller.textAlignVertical,
       textCapitalization: _controller.textCapitalization,
-    );
+    ));
   }
 
   /// Builds the hint text based on the current state of the form field controller.
