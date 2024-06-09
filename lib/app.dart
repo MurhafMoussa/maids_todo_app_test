@@ -11,11 +11,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      minTextAdapt: true,
-      designSize: const Size(390, 844),
-    );
+    ScreenUtil.init(context);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: getIt<NavigationRoute>().router,
@@ -23,9 +19,15 @@ class App extends StatelessWidget {
       darkTheme: ThemesData.darkTheme(),
       title: 'Maidoy',
       builder: (context, child) {
-        return BlocProvider<UserCubit>(
-          create: (context) => getIt<UserCubit>(),
-          child: child,
+        ScreenUtil.init(context);
+
+        return MediaQuery(
+          data:
+              MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
+          child: BlocProvider<UserCubit>(
+            create: (context) => getIt<UserCubit>(),
+            child: child,
+          ),
         );
       },
     );

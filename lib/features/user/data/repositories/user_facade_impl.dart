@@ -4,6 +4,7 @@ import 'package:maids_todo_app_test/core/errors/app_exceptions.dart';
 import 'package:maids_todo_app_test/core/errors/exception_handler.dart';
 import 'package:maids_todo_app_test/core/networking/connectivity.dart';
 import 'package:maids_todo_app_test/core/params/login_param.dart';
+import 'package:maids_todo_app_test/core/typedefs/result.dart';
 import 'package:maids_todo_app_test/features/user/data/data_sources/user_local_data_source.dart';
 import 'package:maids_todo_app_test/features/user/data/data_sources/user_remote_data_source.dart';
 import 'package:maids_todo_app_test/features/user/domain/repositories/user_facade.dart';
@@ -20,7 +21,7 @@ class UserFacadeImpl implements UserFacade {
   final UserRemoteDataSource _userRemoteDataSource;
   final Connectivity _connectivity;
   @override
-  Future<Either<AppExceptions, String>> login(LoginParam body) async {
+  Future<Result<String>> login(LoginParam body) async {
     if (!await _connectivity.isConnected) {
       return const Left(AppExceptions.noInternetConnection());
     }
@@ -34,7 +35,7 @@ class UserFacadeImpl implements UserFacade {
   }
 
   @override
-  Future<Either<AppExceptions, String>> logout() {
+  Future<Result<String>> logout() {
     return handleRepositoryCalls<String>(
       () async {
         _userLocalDataSource.deleteUser();

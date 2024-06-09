@@ -400,8 +400,8 @@ class UtilityFunctions {
   }
 
   static List<String> _groupIntoWords(String text) {
-    final RegExp _upperAlphaRegex = RegExp('[A-Z]');
-    final _symbolSet = {' ', '.', '/', '_', r'\', '-'};
+    final RegExp upperAlphaRegex = RegExp('[A-Z]');
+    final symbolSet = {' ', '.', '/', '_', r'\', '-'};
     final sb = StringBuffer();
     final words = <String>[];
     final isAllCaps = text.toUpperCase() == text;
@@ -409,13 +409,13 @@ class UtilityFunctions {
     for (var i = 0; i < text.length; i++) {
       var char = text[i];
       var nextChar = i + 1 == text.length ? null : text[i + 1];
-      if (_symbolSet.contains(char)) {
+      if (symbolSet.contains(char)) {
         continue;
       }
       sb.write(char);
       var isEndOfWord = nextChar == null ||
-          (_upperAlphaRegex.hasMatch(nextChar) && !isAllCaps) ||
-          _symbolSet.contains(nextChar);
+          (upperAlphaRegex.hasMatch(nextChar) && !isAllCaps) ||
+          symbolSet.contains(nextChar);
       if (isEndOfWord) {
         words.add('$sb');
         sb.clear();

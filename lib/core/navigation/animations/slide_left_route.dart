@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SlideLeftRoute extends PageRouteBuilder {
-  final Widget page;
-  final RouteSettings settings;
 
   SlideLeftRoute({
     required this.page,
@@ -24,7 +22,7 @@ class SlideLeftRoute extends PageRouteBuilder {
             Widget child,
           ) =>
               SlideTransition(
-            key: new GlobalKey(),
+            key: GlobalKey(),
             position: Tween<Offset>(
               begin: const Offset(1, 0),
               end: Offset.zero,
@@ -36,4 +34,7 @@ class SlideLeftRoute extends PageRouteBuilder {
           reverseTransitionDuration:
               reverseTransitionDuration ?? const Duration(milliseconds: 300),
         );
+  final Widget page;
+  @override
+  final RouteSettings settings;
 }

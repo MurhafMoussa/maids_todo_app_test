@@ -1,8 +1,7 @@
-import 'package:dartz/dartz.dart';
-import 'package:maids_todo_app_test/core/errors/app_exceptions.dart';
 import 'package:maids_todo_app_test/core/params/login_param.dart';
+import 'package:maids_todo_app_test/core/typedefs/result.dart';
 
 abstract class UserFacade {
-  Future<Either<AppExceptions, String>> login(LoginParam param);
-  Future<Either<AppExceptions, String>> logout();
+  Future<Result<String>> login(LoginParam param);
+  Future<Result<String>> logout();
 }

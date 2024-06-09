@@ -26,59 +26,43 @@ class DioConsumer implements ApiConsumer {
 
   @override
   Future get(String path,
-      {Map<String, dynamic>? queryParameters, CancelToken? cancelToken}) async {
-    try {
-      final response = await _client.get(
-        path,
-        queryParameters: queryParameters,
-        cancelToken: cancelToken,
-      );
-      return response.data;
-    } catch (error) {
-      rethrow;
-    }
+      {Map<String, dynamic>? queryParameters, CancelToken? cancelToken,}) async {
+    final response = await _client.get(
+      path,
+      queryParameters: queryParameters,
+      cancelToken: cancelToken,
+    );
+    return response.data;
   }
 
   @override
   Future post(String path,
       {Map<String, dynamic>? body,
       FormData? formData,
-      Map<String, dynamic>? queryParameters}) async {
-    try {
-      final response = await _client.post(path,
-          queryParameters: queryParameters, data: formData ?? body);
-      return response.data;
-    } catch (error) {
-      rethrow;
-    }
+      Map<String, dynamic>? queryParameters,}) async {
+    final response = await _client.post(path,
+        queryParameters: queryParameters, data: formData ?? body,);
+    return response.data;
   }
 
   @override
   Future put(String path,
       {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters}) async {
-    try {
-      final response = await _client.put(
-        path,
-        queryParameters: queryParameters,
-        data: body,
-      );
-      return response.data;
-    } catch (error) {
-      rethrow;
-    }
+      Map<String, dynamic>? queryParameters,}) async {
+    final response = await _client.put(
+      path,
+      queryParameters: queryParameters,
+      data: body,
+    );
+    return response.data;
   }
 
   @override
   Future delete(String path, {Map<String, dynamic>? queryParameters}) async {
-    try {
-      final response = await _client.delete(
-        path,
-        queryParameters: queryParameters,
-      );
-      return response.data;
-    } catch (error) {
-      rethrow;
-    }
+    final response = await _client.delete(
+      path,
+      queryParameters: queryParameters,
+    );
+    return response.data;
   }
 }

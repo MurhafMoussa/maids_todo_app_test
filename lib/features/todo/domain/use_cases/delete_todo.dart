@@ -1,7 +1,6 @@
-import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:maids_todo_app_test/core/errors/app_exceptions.dart';
 import 'package:maids_todo_app_test/core/params/id_param.dart';
+import 'package:maids_todo_app_test/core/typedefs/result.dart';
 import 'package:maids_todo_app_test/core/usecases/usecase.dart';
 import 'package:maids_todo_app_test/features/todo/domain/repositories/todo_repository.dart';
 
@@ -11,7 +10,7 @@ class DeleteTodo extends UseCase<String, IdParam> {
 
   final TodoRepository _todoRepository;
   @override
-  Future<Either<AppExceptions, String>> call(IdParam param) async {
+  Future<Result<String>> call(IdParam param) async {
     return await _todoRepository.delete(param);
   }
 }

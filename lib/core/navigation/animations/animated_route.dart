@@ -1,8 +1,7 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AnimatedRoute extends PageRouteBuilder {
-  final Widget page;
 
   AnimatedRoute({
     required this.page,
@@ -22,21 +21,22 @@ class AnimatedRoute extends PageRouteBuilder {
           reverseTransitionDuration:
               reverseTransitionDuration ?? const Duration(milliseconds: 300),
         );
+  final Widget page;
 }
 
 class SlidingAnimated extends StatelessWidget {
-  final double initialOffsetX;
-  final double intervalStart;
-  final double intervalEnd;
-  final Widget child;
 
   const SlidingAnimated({
-    Key? key,
+    super.key,
     required this.initialOffsetX,
     required this.intervalStart,
     required this.intervalEnd,
     required this.child,
-  }) : super(key: key);
+  });
+  final double initialOffsetX;
+  final double intervalStart;
+  final double intervalEnd;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +68,16 @@ class SlidingAnimated extends StatelessWidget {
 }
 
 class FadeAnimated extends StatelessWidget {
-  final double intervalStart;
-  final double intervalEnd;
-  final Widget child;
 
   const FadeAnimated({
-    Key? key,
+    super.key,
     required this.intervalStart,
     required this.intervalEnd,
     required this.child,
-  }) : super(key: key);
+  });
+  final double intervalStart;
+  final double intervalEnd;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,6 @@ class FadeAnimated extends StatelessWidget {
       animation: animation,
       builder: (context, child) {
         return FadeTransition(
-          child: child,
           opacity: Tween<double>(
             begin: 0,
             end: 1,
@@ -101,6 +100,7 @@ class FadeAnimated extends StatelessWidget {
               parent: animation,
             ),
           ),
+          child: child,
         );
       },
       child: child,

@@ -78,68 +78,67 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     // Observe changes in the form field controller using Obx for reactive UI updates.
 
-    return Obx(
-            () => TextFormField(
-      // Key for identifying and interacting with the text form field.
-      key: _controller.key,
+    return Obx(() => TextFormField(
+          // Key for identifying and interacting with the text form field.
+          key: _controller.key,
 
-      // Control various behavior and appearance of the text form field.
-      enabled: _controller.enabled,
-      expands: _controller.expands,
-      readOnly: _controller.readOnly,
-      textDirection: _controller.textDirection,
-      controller: _controller.textEditingController,
-      focusNode: _controller.focusNode,
-      keyboardType: _controller.keyboardType,
-      textInputAction: _controller.textInputAction,
-      style: _controller.style ??
-          TextThemeStyles.getTextStyle(
-            FigmaFontStyle.h3Regular,
-            color: AppColors.dark,
-          ),
-      inputFormatters: _controller.inputFormatters,
-      autofillHints: _controller.keyboardType == TextInputType.phone
-          ? <String>[AutofillHints.telephoneNumberNational]
-          : _controller.keyboardType == TextInputType.visiblePassword
-              ? <String>[AutofillHints.password]
-              : null,
+          // Control various behavior and appearance of the text form field.
+          enabled: _controller.enabled,
+          expands: _controller.expands,
+          readOnly: _controller.readOnly,
+          textDirection: _controller.textDirection,
+          controller: _controller.textEditingController,
+          focusNode: _controller.focusNode,
+          keyboardType: _controller.keyboardType,
+          textInputAction: _controller.textInputAction,
+          style: _controller.style ??
+              TextThemeStyles.getTextStyle(
+                FigmaFontStyle.h3Regular,
+                color: AppColors.dark,
+              ),
+          inputFormatters: _controller.inputFormatters,
+          autofillHints: _controller.keyboardType == TextInputType.phone
+              ? <String>[AutofillHints.telephoneNumberNational]
+              : _controller.keyboardType == TextInputType.visiblePassword
+                  ? <String>[AutofillHints.password]
+                  : null,
 
-      // Customize the appearance and behavior of the text form field.
-      decoration: widget.decoration?.copyWith(
-            prefixIcon: widget.prefixIcon,
-            suffixIcon: suffixIcon(),
-            label: _controller.showLabel ? _buildLabel(context) : null,
-            hintText: _buildHint(),
-          ) ??
-          InputDecoration(
-            prefixIcon: widget.prefixIcon,
-            suffixIcon: suffixIcon(),
-            label: _controller.showLabel ? _buildLabel(context) : null,
-            hintText: _buildHint(),
-          ),
+          // Customize the appearance and behavior of the text form field.
+          decoration: widget.decoration?.copyWith(
+                prefixIcon: widget.prefixIcon,
+                suffixIcon: suffixIcon(),
+                label: _controller.showLabel ? _buildLabel(context) : null,
+                hintText: _buildHint(),
+              ) ??
+              InputDecoration(
+                prefixIcon: widget.prefixIcon,
+                suffixIcon: suffixIcon(),
+                label: _controller.showLabel ? _buildLabel(context) : null,
+                hintText: _buildHint(),
+              ),
 
-      // Validation function to determine whether the input is valid.
-      validator: _controller.validate,
+          // Validation function to determine whether the input is valid.
+          validator: _controller.validate,
 
-      // Callbacks for handling user interactions with the text form field.
-      onTap: () => _controller.onTap(context),
-      onFieldSubmitted: _controller.onFieldSubmitted,
+          // Callbacks for handling user interactions with the text form field.
+          onTap: () => _controller.onTap(context),
+          onFieldSubmitted: _controller.onFieldSubmitted,
 
-      // Configure additional features of the text form field.
-      obscureText: _controller.obscureText.value,
-      maxLines: _controller.maxLines,
-      maxLength: _controller.maxLength,
-      textAlign: _controller.textAlign,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      enableSuggestions: _controller.enableSuggestions,
-      cursorWidth: _controller.cursorSettings.cursorWidth,
-      cursorHeight: _controller.cursorSettings.cursorHeight,
-      cursorColor: _controller.cursorSettings.cursorColor,
-      cursorRadius: _controller.cursorSettings.cursorRadius,
-      showCursor: _controller.cursorSettings.showCursor,
-      textAlignVertical: _controller.textAlignVertical,
-      textCapitalization: _controller.textCapitalization,
-    ));
+          // Configure additional features of the text form field.
+          obscureText: _controller.obscureText.value,
+          maxLines: _controller.maxLines,
+          maxLength: _controller.maxLength,
+          textAlign: _controller.textAlign,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          enableSuggestions: _controller.enableSuggestions,
+          cursorWidth: _controller.cursorSettings.cursorWidth,
+          cursorHeight: _controller.cursorSettings.cursorHeight,
+          cursorColor: _controller.cursorSettings.cursorColor,
+          cursorRadius: _controller.cursorSettings.cursorRadius,
+          showCursor: _controller.cursorSettings.showCursor,
+          textAlignVertical: _controller.textAlignVertical,
+          textCapitalization: _controller.textCapitalization,
+        ),);
   }
 
   /// Builds the hint text based on the current state of the form field controller.

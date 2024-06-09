@@ -7,6 +7,7 @@ import 'package:maids_todo_app_test/core/params/add_todo_param.dart';
 import 'package:maids_todo_app_test/core/params/edit_todo_param.dart';
 import 'package:maids_todo_app_test/core/params/id_param.dart';
 import 'package:maids_todo_app_test/core/params/page_param.dart';
+import 'package:maids_todo_app_test/core/typedefs/result.dart';
 import 'package:maids_todo_app_test/features/todo/data/data_sources/todo_local_data_source.dart';
 import 'package:maids_todo_app_test/features/todo/data/data_sources/todo_remote_data_source.dart';
 import 'package:maids_todo_app_test/features/todo/domain/entities/pagination_entity.dart';
@@ -25,7 +26,7 @@ class TodoRepositoryImpl implements TodoRepository {
   final Connectivity _connectivity;
 
   @override
-  Future<Either<AppExceptions, String>> add(AddTodoParam todo) async {
+  Future<Result<String>> add(AddTodoParam todo) async {
     if (!await _connectivity.isConnected) {
       return const Left(AppExceptions.noInternetConnection());
     }
@@ -38,7 +39,7 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
-  Future<Either<AppExceptions, String>> delete(IdParam param) async {
+  Future<Result<String>> delete(IdParam param) async {
     if (!await _connectivity.isConnected) {
       return const Left(AppExceptions.noInternetConnection());
     }
@@ -51,7 +52,7 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
-  Future<Either<AppExceptions, String>> edit(EditTodoParam param) async {
+  Future<Result<String>> edit(EditTodoParam param) async {
     if (!await _connectivity.isConnected) {
       return const Left(AppExceptions.noInternetConnection());
     }
@@ -64,7 +65,7 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
-  Future<Either<AppExceptions, PaginationEntity>> getAll(
+  Future<Result<PaginationEntity>> getAll(
     PageParam param,
   ) async {
     if (!await _connectivity.isConnected) {

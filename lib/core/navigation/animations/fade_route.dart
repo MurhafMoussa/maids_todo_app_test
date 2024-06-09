@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class FadeRoute extends PageRouteBuilder {
-  final Widget page;
 
   FadeRoute({
     required this.page,
@@ -31,4 +30,5 @@ class FadeRoute extends PageRouteBuilder {
           reverseTransitionDuration:
               reverseTransitionDuration ?? const Duration(milliseconds: 300),
         );
+  final Widget page;
 }

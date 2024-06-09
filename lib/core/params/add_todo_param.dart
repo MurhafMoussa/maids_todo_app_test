@@ -5,7 +5,7 @@ class AddTodoParam extends BaseParams {
       {super.cancelToken,
       required this.userId,
       required this.isCompleted,
-      required this.todo});
+      required this.todo,});
 
   final int userId;
   final bool isCompleted;

@@ -6,11 +6,9 @@ import 'package:maids_todo_app_test/core/constants/border_radius_manager.dart';
 import 'package:maids_todo_app_test/core/constants/box_shadow_manager.dart';
 import 'package:maids_todo_app_test/core/constants/padding_manager.dart';
 import 'package:maids_todo_app_test/core/di/service_locator.dart';
-import 'package:maids_todo_app_test/core/errors/app_exceptions.dart';
 import 'package:maids_todo_app_test/core/navigation/nav.dart';
 import 'package:maids_todo_app_test/core/params/add_todo_param.dart';
 import 'package:maids_todo_app_test/core/states/standard_state.dart';
-import 'package:maids_todo_app_test/core/ui/widgets/display_messages_widgets.dart';
 import 'package:maids_todo_app_test/core/ui/widgets/forms/text_area_form_field/text_area_form_field.dart';
 import 'package:maids_todo_app_test/core/ui/widgets/loading_widget.dart';
 import 'package:maids_todo_app_test/features/todo/presentation/manager/todo_operations_cubit.dart';
@@ -65,23 +63,14 @@ class AddTodoBottomSheetContent extends StatelessWidget {
               child: BlocConsumer<TodoOperationsCubit, StandardState<String>>(
                 listener: (context, state) {
                   state.whenOrNull(
-                    failure: (exception) {
-                      showErrorSnackBar(
-                        AppExceptions.getErrorMessage(exception),
-                        context,
-                      );
-                    },
-                    success: (successValue) {
-                      showSuccessSnackBar(successValue, context);
+                    success: (_) {
                       Nav.pop(context);
                     },
                   );
                 },
                 builder: (context, state) => state.maybeWhen(
                   orElse: () => const Text('add'),
-                  loading: () {
-                    return const LoadingWidget();
-                  },
+                  loading: () => const LoadingWidget(),
                 ),
               ),
             ),

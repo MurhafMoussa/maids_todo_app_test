@@ -15,14 +15,13 @@ class PaginationModel extends BaseModel<PaginationEntity>
     required int skip,
     @JsonKey(name: 'limit') required int itemCountPerPage,
   }) = _PaginationModel;
-  const PaginationModel._();
-
   factory PaginationModel.fromJson(
     Map<String, dynamic> json,
   ) =>
       _$PaginationModelFromJson(
         json,
       );
+  const PaginationModel._();
 
   @override
   PaginationEntity toEntity() => PaginationEntity(

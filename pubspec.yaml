@@ -1,53 +1,93 @@
+# Name of your Flutter project
 name: maids_todo_app_test
+# Short description of your project
 description: "A new Flutter project."
+
+# Set publish_to: 'none' to prevent publishing to the pub.dev package repository
 publish_to: 'none'
+
+# This defines the version of your project
 version: 1.0.0+1
+
 environment:
+  # This defines the minimum and maximum supported Dart SDK versions
   sdk: '>=3.3.3 <4.0.0'
 
 dependencies:
+  # Flutter framework (required)
   flutter:
     sdk: flutter
+  # Cupertino Icons for iOS-style icons (optional)
   cupertino_icons: ^1.0.8
+  # HTTP client for making network requests
   dio: ^5.4.3+1
+  # Router for navigation within your app
   go_router: ^14.1.1
+  # Shared preferences for storing data locally
   shared_preferences: ^2.2.3
+  # Logging library for debugging
   logger: ^2.3.0
+  # Internationalization for handling different languages
   intl: ^0.19.0
+  # Dependency injection for managing dependencies
   get_it: ^7.7.0
+  # Dependency injection for generating code
   injectable:
+  # BLoC state management library
   flutter_bloc: ^8.1.5
+  # Library for generating immutable data classes
   equatable: ^2.0.5
+  # Caching library for Dio
   dio_cache_interceptor: ^3.5.0
+  # Library for checking internet connectivity
   internet_connection_checker: ^1.0.0+1
-  flutter_screenutil:
+  # Library for responsive UI based on screen size
+  flutter_screenutil: ^5.9.3
+  # Functional programming library
   dartz: ^0.10.1
+  # Library for using Google Fonts
   google_fonts: ^6.2.1
+  # State management library (alternative to BLoC)
   get: ^4.6.6
+  # Loading spinners library
   flutter_spinkit: ^5.2.1
-  pull_to_refresh: ^2.0.0
-  flutter_animate: ^4.5.0
+  # Local database library
+  sqflite: ^2.3.3+1
+  # Infinite scroll pagination library
+  infinite_scroll_pagination: ^4.0.0
+
 dev_dependencies:
+  # Testing framework for Flutter apps
   flutter_test:
     sdk: flutter
+  # Linter for analyzing code quality
   flutter_lints: ^4.0.0
-  # A build system for Dart code generation and modular compilation
+  # Code generation for dependency injection
   build_runner: ^2.4.9
-  # Dependency injection code generator
+  # Code generation for injectable
   injectable_generator: ^2.6.1
-  # Freezed package code generator
+  # Code generation for Freezed
   freezed: ^2.5.2
-  # Used in freezed package
+  # Required by Freezed
   json_serializable: ^6.8.0
-  # Used to change app icon
+  # Change app icon tool
   flutter_launcher_icons: ^0.13.1
-  # Used to change the native splash screen
+  # Change app splash screen tool
   flutter_native_splash: ^2.4.0
-  # Change App Package Name with single command.
+  # Change app package name tool
   change_app_package_name: ^1.1.0
-  sqflite: ^2.3.3+1
+  # Mocking library for unit testing
+  mockito: ^5.4.4
+  # General testing library
+  test: ^1.21.0
+  # Required by sqflite
+  sqflite_common_ffi: ^2.0.0
+  # BLoC testing library
+  bloc_test:
+
 flutter:
+  # Enables Material Design widgets
   uses-material-design: true
+  # Lists assets to be included in the app
   assets:
     - assets/images/png/
-

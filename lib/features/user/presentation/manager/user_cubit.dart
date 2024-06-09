@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:maids_todo_app_test/core/params/login_param.dart';
 import 'package:maids_todo_app_test/core/params/no_params.dart';
@@ -30,12 +29,11 @@ class UserCubit extends Cubit<StandardState<String>> {
   final Logout _logout;
   late final NameFormFieldController nameFormFieldController;
   late final PasswordFormFieldController passwordFormFieldController;
-  final GlobalKey<FormState> formKey = GlobalKey();
+
   String username = '';
   String password = '';
 
   Future<void> login() async {
-    if (!formIsValid) return;
     emit(const StandardState.loading());
     final param = LoginParam(
       expirationDateInMinutes: 30,
@@ -44,8 +42,12 @@ class UserCubit extends Cubit<StandardState<String>> {
     );
     final response = await _login(param);
     response.fold(
-      (l) => emit(StandardState.failure(l)),
-      (r) => emit(StandardState.success(r)),
+      (l) {
+        emit(StandardState.failure(l));
+      },
+      (r) {
+        emit(StandardState.success(r));
+      },
     );
   }
 
@@ -53,19 +55,24 @@ class UserCubit extends Cubit<StandardState<String>> {
     emit(const StandardState.loading());
     final response = await _logout(const NoParams());
     response.fold(
-      (l) => emit(StandardState.failure(l)),
-      (r) => emit(StandardState.success(r)),
+      (l) {
+        emit(StandardState.failure(l));
+      },
+      (r) {
+        emit(StandardState.success(r));
+      },
     );
   }
 
   bool get formIsValid =>
-      formKey.currentState != null && formKey.currentState!.validate();
-
+      nameFormFieldController.key.currentState != null &&
+      nameFormFieldController.key.currentState!.validate() &&
+      passwordFormFieldController.key.currentState != null &&
+      passwordFormFieldController.key.currentState!.validate();
   @override
   Future<void> close() {
-    nameFormFieldController.dispose();
-    passwordFormFieldController.dispose();
-
+    nameFormFieldController.onClose();
+    passwordFormFieldController.onClose();
     return super.close();
   }
 }

@@ -22,31 +22,31 @@ class DateUtility {
 
   static List<String>? get weekdays => _getWeekdays();
 
-  static const List<String> _locales = const [
-    "en",
-    "ja",
-    "zh",
-    "ko",
-    "de",
-    "fr",
-    "ar",
+  static const List<String> _locales = [
+    'en',
+    'ja',
+    'zh',
+    'ko',
+    'de',
+    'fr',
+    'ar',
   ];
 
-  static const Map<String, List<String>> weekdaysByLocale = const {
-    "en": const ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    "ja": const ["日", "月", "火", "水", "木", "金", "土"],
-    "zh": const ["日", "一", "二", "三", "四", "五", "六"],
-    "ko": const ["일", "월", "화", "수", "목", "금", "토"],
-    "de": const ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
-    "fr": const ["dim", "lun", "mar", "mer", "jeu", "vev", "sam"],
-    "ar": const [
-      "الأحد",
-      "الإثنين",
-      "الثلاثاء",
-      "الأربعاء",
-      "الخميس",
-      "الجمعة",
-      "السبت"
+  static const Map<String, List<String>> weekdaysByLocale = {
+    'en': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    'ja': ['日', '月', '火', '水', '木', '金', '土'],
+    'zh': ['日', '一', '二', '三', '四', '五', '六'],
+    'ko': ['일', '월', '화', '수', '목', '금', '토'],
+    'de': ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+    'fr': ['dim', 'lun', 'mar', 'mer', 'jeu', 'vev', 'sam'],
+    'ar': [
+      'الأحد',
+      'الإثنين',
+      'الثلاثاء',
+      'الأربعاء',
+      'الخميس',
+      'الجمعة',
+      'السبت',
     ],
   };
 
@@ -124,8 +124,8 @@ class DateUtility {
   /// The last day of a given month
   static DateTime lastDayOfMonth(DateTime month) {
     var beginningNextMonth = (month.month < 12)
-        ? DateTime(month.year, month.month + 1, 1)
-        : DateTime(month.year + 1, 1, 1);
+        ? DateTime(month.year, month.month + 1)
+        : DateTime(month.year + 1);
     return beginningNextMonth.subtract(const Duration(days: 1));
   }
 

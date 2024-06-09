@@ -12,8 +12,6 @@ part 'app_exceptions.freezed.dart';
 abstract class AppExceptions with _$AppExceptions {
   const factory AppExceptions.requestCancelled() = RequestCancelled;
   const factory AppExceptions.canceledByUser() = CanceledByUser;
-  const factory AppExceptions.firebasePlatformException() =
-      FirebasePlatformException;
 
   const factory AppExceptions.badRequest(String reason) = BadRequest;
   const factory AppExceptions.unauthorizedRequest(String reason) =
@@ -23,8 +21,6 @@ abstract class AppExceptions with _$AppExceptions {
   const factory AppExceptions.notFound(String reason) = NotFound;
 
   const factory AppExceptions.methodNotAllowed() = MethodNotAllowed;
-
-  const factory AppExceptions.notAcceptable() = NotAcceptable;
 
   const factory AppExceptions.requestTimeout() = RequestTimeout;
 
@@ -37,8 +33,6 @@ abstract class AppExceptions with _$AppExceptions {
 
   const factory AppExceptions.internalServerError() = InternalServerError;
 
-  const factory AppExceptions.notImplemented() = NotImplemented;
-
   const factory AppExceptions.serviceUnavailable() = ServiceUnavailable;
 
   const factory AppExceptions.noInternetConnection() = NoInternetConnection;
@@ -48,10 +42,66 @@ abstract class AppExceptions with _$AppExceptions {
   const factory AppExceptions.unableToProcess() = UnableToProcess;
 
   const factory AppExceptions.defaultError(String error) = DefaultError;
+  const factory AppExceptions.invalidCredentials() = InvalidCredentials;
+  const factory AppExceptions.emailAlreadyUsed() = EmailAlreadyUsed;
 
   const factory AppExceptions.unexpectedError() = UnexpectedError;
+  factory AppExceptions.getException(error, StackTrace stack) {
+    error.toString().logE;
+    stack.toString().logE;
+    if (error is Exception) {
+      try {
+        if (error is DioException) {
+          return AppExceptions._handleDioExceptions(error);
+        } else {
+          return const AppExceptions.unexpectedError();
+        }
+      } on FormatException {
+        return const AppExceptions.formatException();
+      } on SocketException {
+        return const AppExceptions.noInternetConnection();
+      } catch (_) {
+        return const AppExceptions.unexpectedError();
+      }
+    } else {
+      return const AppExceptions.unexpectedError();
+    }
+  }
 
-  factory AppExceptions._handleResponse(Response? response) {
+  factory AppExceptions._handleDioExceptions(
+    DioException error,
+  ) {
+    AppExceptions exception;
+    switch (error.type) {
+      case DioExceptionType.cancel:
+        exception = const AppExceptions.requestCancelled();
+        break;
+      case DioExceptionType.connectionTimeout:
+        exception = const AppExceptions.requestTimeout();
+        break;
+      case DioExceptionType.unknown:
+        exception = const AppExceptions.noInternetConnection();
+        break;
+      case DioExceptionType.receiveTimeout:
+        exception = const AppExceptions.sendTimeout();
+        break;
+      case DioExceptionType.badResponse:
+        exception = AppExceptions._handleResponseStatusCodes(error.response);
+        break;
+
+      case DioExceptionType.sendTimeout:
+        exception = const AppExceptions.sendTimeout();
+        break;
+      case DioExceptionType.badCertificate:
+        exception = const AppExceptions.unableToProcess();
+        break;
+      case DioExceptionType.connectionError:
+        exception = const AppExceptions.noInternetConnection();
+        break;
+    }
+    return exception;
+  }
+  factory AppExceptions._handleResponseStatusCodes(Response? response) {
     ErrorModel errorModel = ErrorModel.fromJson(response?.data);
 
     int statusCode = response?.statusCode ?? 0;
@@ -79,74 +129,15 @@ abstract class AppExceptions with _$AppExceptions {
       case 503:
         return const AppExceptions.serviceUnavailable();
       default:
-        int responseCode = statusCode;
         return AppExceptions.defaultError(
-          'Received invalid status code: $responseCode',
+          'Received invalid status code: $statusCode',
         );
-    }
-  }
-
-  factory AppExceptions.getException(error, StackTrace stack) {
-    error.toString().logE;
-    stack.toString().logE;
-    if (error is Exception) {
-      try {
-        AppExceptions exception;
-
-        if (error is DioException) {
-          switch (error.type) {
-            case DioExceptionType.cancel:
-              exception = const AppExceptions.requestCancelled();
-              break;
-            case DioExceptionType.connectionTimeout:
-              exception = const AppExceptions.requestTimeout();
-              break;
-            case DioExceptionType.unknown:
-              exception = const AppExceptions.noInternetConnection();
-              break;
-            case DioExceptionType.receiveTimeout:
-              exception = const AppExceptions.sendTimeout();
-              break;
-            case DioExceptionType.badResponse:
-              exception = AppExceptions._handleResponse(error.response);
-              break;
-
-            case DioExceptionType.sendTimeout:
-              exception = const AppExceptions.sendTimeout();
-              break;
-            case DioExceptionType.badCertificate:
-              exception = const AppExceptions.unableToProcess();
-              break;
-            case DioExceptionType.connectionError:
-              exception = const AppExceptions.noInternetConnection();
-              break;
-          }
-        } else if (error is SocketException) {
-          exception = const AppExceptions.noInternetConnection();
-        } else {
-          exception = const AppExceptions.unexpectedError();
-        }
-        return exception;
-      } on FormatException {
-        return const AppExceptions.formatException();
-      } catch (_) {
-        return const AppExceptions.unexpectedError();
-      }
-    } else {
-      if (error.toString().contains('is not a subtype of')) {
-        return const AppExceptions.unableToProcess();
-      } else {
-        return const AppExceptions.unexpectedError();
-      }
     }
   }
 
   static String getErrorMessage(AppExceptions exception) {
     String errorMessage = '';
     exception.when(
-      notImplemented: () {
-        errorMessage = 'Not Implemented';
-      },
       requestCancelled: () {
         errorMessage = 'Request Cancelled';
       },
@@ -195,17 +186,17 @@ abstract class AppExceptions with _$AppExceptions {
       formatException: () {
         errorMessage = 'Unexpected error occurred';
       },
-      notAcceptable: () {
-        errorMessage = 'Not acceptable';
-      },
       forbidden: (String error) {
         errorMessage = error;
       },
-      firebasePlatformException: () {
-        errorMessage = 'Platform Exception';
-      },
       canceledByUser: () {
         errorMessage = 'Canceled By The User';
+      },
+      invalidCredentials: () {
+        errorMessage = 'Invalid Credentials';
+      },
+      emailAlreadyUsed: () {
+        errorMessage = 'Email already used';
       },
     );
     return errorMessage;

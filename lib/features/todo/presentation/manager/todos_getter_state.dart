@@ -1,12 +1,12 @@
-part of 'todos_getter_cubit.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:maids_todo_app_test/features/todo/domain/entities/todo_entity.dart';
 
-@Freezed(makeCollectionsUnmodifiable: false)
+part 'todos_getter_state.freezed.dart';
+
+@freezed
 class TodosGetterState with _$TodosGetterState {
-  const factory TodosGetterState.loading() = _Loading;
-  const factory TodosGetterState.success(
-      {required List<TodoEntity> todos, required bool canLoadMore}) = _Success;
-  const factory TodosGetterState.error({
-    required AppExceptions exception,
-    required List<TodoEntity> oldTodos,
-  }) = _Error;
+  const factory TodosGetterState.loadInProgress() = TodosLoadInProgress;
+  const factory TodosGetterState.loadSuccess(
+      List<TodoEntity> todos, bool isLastPage,) = TodosLoadSuccess;
+  const factory TodosGetterState.loadFailure(String error) = TodosLoadFailure;
 }

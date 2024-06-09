@@ -11,7 +11,7 @@ class Validators {
   static final RegExp _fullNameRegExp = RegExp(r'^(?!\s*$).+ (?!\s*$).+');
 
   static bool isNotEmptyString(String? string) {
-    return string != null ? string.trim() != "" : false;
+    return string != null ? string.trim() != '' : false;
   }
 
   static bool isValidEmail(String? email) {
@@ -19,7 +19,7 @@ class Validators {
   }
 
   static bool hasCharacters(String text) {
-    String modText = text.replaceAll(" ", "");
+    String modText = text.replaceAll(' ', '');
     return modText.isNotEmpty;
   }
 
@@ -44,7 +44,7 @@ class Validators {
   static bool isValidPhoneNumber(String? phone) {
     if (phone == null) return false;
     // Only store the actual digits
-    final newPhone = phone.replaceAll(RegExp("[^0-9]"), "");
+    final newPhone = phone.replaceAll(RegExp('[^0-9]'), '');
     return newPhone.isNotEmpty &&
         ((newPhone.startsWith('09') && newPhone.length == 10));
   }

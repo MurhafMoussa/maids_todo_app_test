@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:maids_todo_app_test/core/constants/strings_manager.dart';
+import 'package:maids_todo_app_test/core/di/service_locator.dart';
 import 'package:maids_todo_app_test/core/extensions/logger_extension.dart';
 import 'package:maids_todo_app_test/features/user/data/data_sources/user_local_data_source.dart';
-
-import '../di/service_locator.dart';
 
 class DioLoggerInterceptor extends Interceptor {
   DioLoggerInterceptor();

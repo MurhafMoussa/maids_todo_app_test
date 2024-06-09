@@ -1,23 +1,21 @@
-import 'package:dartz/dartz.dart';
-import 'package:maids_todo_app_test/core/errors/app_exceptions.dart';
 import 'package:maids_todo_app_test/core/params/add_todo_param.dart';
 import 'package:maids_todo_app_test/core/params/edit_todo_param.dart';
 import 'package:maids_todo_app_test/core/params/id_param.dart';
 import 'package:maids_todo_app_test/core/params/page_param.dart';
+import 'package:maids_todo_app_test/core/typedefs/result.dart';
 import 'package:maids_todo_app_test/features/todo/domain/entities/pagination_entity.dart';
-import 'package:maids_todo_app_test/features/todo/domain/entities/todo_entity.dart';
 
 abstract class TodoRepository {
-  Future<Either<AppExceptions, PaginationEntity>> getAll(
+  Future<Result<PaginationEntity>> getAll(
     PageParam param,
   );
-  Future<Either<AppExceptions, String>> edit(
+  Future<Result<String>> edit(
     EditTodoParam param,
   );
-  Future<Either<AppExceptions, String>> add(
+  Future<Result<String>> add(
     AddTodoParam todo,
   );
-  Future<Either<AppExceptions, String>> delete(
+  Future<Result<String>> delete(
     IdParam param,
   );
 }

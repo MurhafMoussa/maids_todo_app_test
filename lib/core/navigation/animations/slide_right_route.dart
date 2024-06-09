@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SlideRightRoute extends PageRouteBuilder {
-  final Widget page;
 
   SlideRightRoute({
     required this.page,
@@ -32,4 +31,5 @@ class SlideRightRoute extends PageRouteBuilder {
           reverseTransitionDuration:
               reverseTransitionDuration ?? const Duration(milliseconds: 300),
         );
+  final Widget page;
 }

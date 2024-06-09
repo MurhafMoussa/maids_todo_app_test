@@ -19,7 +19,11 @@ class _LoginButtonState extends State<LoginButton> {
     final loginCubit = context.read<UserCubit>();
 
     return FilledButton(
-      onPressed: loginCubit.login,
+      onPressed: () {
+        if (loginCubit.formIsValid) {
+          loginCubit.login();
+        }
+      },
       child: BlocBuilder<UserCubit, StandardState<String>>(
         builder: (context, state) => state.maybeWhen(
           orElse: () => const Text('login'),
