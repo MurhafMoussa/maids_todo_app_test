@@ -7,7 +7,7 @@ void main() {
     test('fromJson should return a valid UserModel instance', () {
       // Arrange
       final jsonData = {
-        'token': 'sample_token',
+        'accessToken': 'sample_token',
         'id': 123,
       };
 
@@ -16,26 +16,26 @@ void main() {
 
       // Assert
       expect(userModel, isA<UserModel>());
-      expect(userModel.token, 'sample_token');
+      expect(userModel.accessToken, 'sample_token');
       expect(userModel.id, 123);
     });
 
     test('toJson should return a valid JSON representation', () {
       // Arrange
-      const userModel = UserModel(token: 'sample_token', id: 123);
+      const userModel = UserModel(accessToken: 'sample_accessToken', id: 123);
 
       // Act
       final json = userModel.toJson();
 
       // Assert
       expect(json, isA<Map<String, dynamic>>());
-      expect(json['token'], 'sample_token');
+      expect(json['accessToken'], 'sample_accessToken');
       expect(json['id'], 123);
     });
 
     test('toEntity should return a NoEntity instance', () {
       // Arrange
-      const userModel = UserModel(token: 'sample_token', id: 123);
+      const userModel = UserModel(accessToken: 'sample_accessToken', id: 123);
 
       // Act
       final entity = userModel.toEntity();

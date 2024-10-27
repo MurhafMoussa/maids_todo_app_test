@@ -43,7 +43,7 @@ class DioLoggerInterceptor extends Interceptor {
   }
 
   Future<Map<String, dynamic>> setHeaders(RequestOptions options) async {
-    final token = getIt<UserLocalDataSource>().getUser()?.token;
+    final token = getIt<UserLocalDataSource>().getUser()?.accessToken;
     return options.headers = {
       StringsManager.accept: StringsManager.applicationJson,
       StringsManager.contentType: StringsManager.applicationJson,

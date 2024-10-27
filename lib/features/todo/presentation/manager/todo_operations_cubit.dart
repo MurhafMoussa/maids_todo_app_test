@@ -28,10 +28,6 @@ class TodoOperationsCubit extends Cubit<StandardState<String>> {
   late final TextAreaFormFieldController textAreaController;
   String todoDescription = '';
   Future<void> add(AddTodoParam param) async {
-    if (textAreaController.key.currentState != null &&
-        textAreaController.key.currentState!.validate()) {
-      return;
-    }
     await _doOperation(
       () => _addTodo(param),
     );

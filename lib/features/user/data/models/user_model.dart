@@ -9,7 +9,7 @@ part 'user_model.g.dart';
 @freezed
 class UserModel extends BaseModel with _$UserModel {
   const factory UserModel({
-    required String token,
+    required String accessToken,
     required int id,
   }) = _UserModel;
   const UserModel._();

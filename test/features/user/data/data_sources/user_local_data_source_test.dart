@@ -14,7 +14,7 @@ void main() {
   group('UserLocalDataSourceImpl', () {
     late MockSharedPreferences mockSharedPreferences;
     late UserLocalDataSourceImpl dataSource;
-    const user = UserModel(id: 1, token: 'some_token');
+    const user = UserModel(id: 1, accessToken: 'some_token');
     final encodedUser = jsonEncode(user.toJson());
 
     setUp(() {
@@ -42,13 +42,20 @@ void main() {
     });
 
     test('saves user to SharedPreferences', () async {
-      when(mockSharedPreferences.setString(
-              'user', '{"token":"some_token","id":1}',),)
-          .thenAnswer((_) => Future.value(true));
+      when(
+        mockSharedPreferences.setString(
+          'user',
+          '{"accessToken":"some_token","id":1}',
+        ),
+      ).thenAnswer((_) => Future.value(true));
       await dataSource.saveUser(user);
       final userAsJson = jsonEncode(user.toJson());
-      verify(mockSharedPreferences.setString(
-          UserLocalDataSource.userKey, userAsJson,),);
+      verify(
+        mockSharedPreferences.setString(
+          UserLocalDataSource.userKey,
+          userAsJson,
+        ),
+      );
     });
 
     test('clears SharedPreferences on user deletion', () async {

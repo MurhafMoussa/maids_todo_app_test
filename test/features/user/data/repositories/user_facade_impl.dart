@@ -40,8 +40,8 @@ void main() {
         expirationDateInMinutes: 30,
       );
       when(mockConnectivity.isConnected).thenAnswer((_) async => true);
-      when(mockUserRemoteDataSource.login(loginParam))
-          .thenAnswer((_) async => const UserModel(token: 'test_token', id: 1));
+      when(mockUserRemoteDataSource.login(loginParam)).thenAnswer(
+          (_) async => const UserModel(accessToken: 'test_token', id: 1));
       when(mockUserLocalDataSource.saveUser(any)).thenAnswer((_) async => true);
 
       // Act

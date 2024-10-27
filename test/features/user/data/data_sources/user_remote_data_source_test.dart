@@ -26,7 +26,7 @@ void main() {
         password: 'test_password',
         expirationDateInMinutes: 30,
       );
-      final response = {'token': 'test_token', 'id': 1};
+      final response = {'accessToken': 'test_token', 'id': 1};
       when(mockApiConsumer.post(any, body: anyNamed('body')))
           .thenAnswer((_) async => response);
 
@@ -35,7 +35,7 @@ void main() {
 
       // Assert
       expect(result, isA<UserModel>());
-      expect(result.token, response['token']);
+      expect(result.accessToken, response['accessToken']);
       expect(result.id, response['id']);
     });
 
